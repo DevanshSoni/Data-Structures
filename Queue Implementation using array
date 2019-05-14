@@ -1,0 +1,88 @@
+//Implementation of Queue using Array in C++
+
+#include <iostream>
+using namespace std;
+class queue
+{
+    int f,r,*arr,s;
+    int IsFull()                //Checks whether the queue is full or not
+    {
+        if((r+1)%s==f)
+        {
+            return 1;
+        }
+        else
+            return 0;
+    }
+    int IsEmpty()               //Checks whether the qqueue is empty or not
+    {
+        if(r==-1&&f==-1)
+        {
+            return 1;
+        }
+        else
+            return 0;
+    }
+    public:
+    queue(int size)             //Constructor 
+    {
+        f=-1;
+        r=-1;
+        s=size;
+        arr=new int[s];
+    }
+    void enqueue(int a)         //Function which enters value into the queue
+    {
+       
+        if(IsEmpty())
+        {
+            r=(f=0);
+            arr[r]=a;
+            cout<<"Value Inserted "<<endl;
+        }
+        else if(IsFull())
+        {
+            cout<<"Queue is Full!!!"<<endl;
+        }
+        else
+        {
+            r=(r+1)%s;
+            arr[r]=a;
+            cout<<"Value Inserted "<<endl;
+        }
+    }
+    void dequeue()              //Function which deletes value from the queue
+    {
+        if(IsEmpty())
+        {
+            cout<<"Queue is empty!! "<<endl;
+        }
+        else if(f==r)
+        {
+            f=(r=-1);
+        }
+        else
+        {
+            f=(f+1)%s;
+            cout<<"Value deleted from the queue"<<endl;
+        }    
+    }
+    void front()                //Function that returns the value at front in the queue
+    {
+        cout<<"Front Element in the queue is "<<arr[f]<<endl; 
+    }
+};
+int main() {
+    int size=5;
+    queue obj(size);
+    obj.enqueue(10);
+    obj.enqueue(20);
+    obj.enqueue(30);
+    obj.enqueue(30);
+    obj.dequeue();
+    obj.enqueue(50);
+    obj.enqueue(60);
+    obj.enqueue(70);
+    obj.front();
+	return 0;
+}
